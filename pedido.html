@@ -1,63 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
+<!-- CABEÇALHO -->
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Super secreto</title>
+  <title>❤️</title>
 </head>
 
-<body>
-  <div id="conteudo">
-    <h2>Você aceita?</h2>
-    <div style="margin: auto;width: 170px;">
-      <button style="position: fixed;display: block;" class="btn" onclick="sim()">SIM</button>
-      <button class="btn" onclick="desvia(this)" onmouseover="desvia(this)" style="position: absolute;">NÃO</button>
-    </div>
-  </div>
-</body>
+<!-- ESTILIZANDO -->
+
 <style>
-  #conteudo {
-    background: #ff7a7a;
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    padding: 10px;
-    text-align: center;
-    font-family: sans-serif;
+  body {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    margin: -100px 0 0 -150px;
+    font-family: "Roboto", sans-serif;
   }
 
-  .btn {
-    background: black;
-    color: white;
-    border: none;
-    padding: 10px;
-    width: 80px;
+  h1 {
+    font-weight: 300;
+  }
+
+  button {
+    padding: 10px 40px;
     border-radius: 5px;
+    font-family: "Roboto", sans-serif;
+    border: transparent;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  button:first-child {
+    background-color: green;
+  }
+
+  button:nth-child(2) {
+    background-color: red;
+  }
+
+  div.buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 100px;
+    margin-top: 30px;
   }
 </style>
 
+<!-- COMEÇO -->
+
+<body>
+  <div>
+    <h1>Quer namorar comigo?</h1>
+    <div class='buttons'>
+      <button>Sim</button>
+      <button>Não</button>
+    </div>
+  </div>
+</body>
+
+<!-- FUNÇÕES -->
+
 <script>
-  function sim() {
-    alert("Você aceitou namorar comigo, já era! :)");
-    // redireciona para um URL após clicar no SIM
-    location.href = "https://music.youtube.com/watch?v=izGwDsrQ1eQ";
-  }
+  var moveButton = document.querySelector("button:nth-child(2)");
 
-  function desvia(btn) {
-    // btn declarado na função
-    btn.style.position = 'absolute';
-    btn.style.bottom = geraPosicao(10, 90);
-    btn.style.left = geraPosicao(10, 90);
+  var correctlyButton = document.querySelector("button:first-child");
+
+  moveButton.addEventListener("click", function () {
+    var vertical = Math.floor(Math.random() * 400);
+    var horizontal = Math.floor(Math.random() * 400);
+    moveButton.style.position = "absolute";
+    moveButton.style.left = vertical + "px";
+    moveButton.style.top = horizontal + "px";
     console.log('opa, desviei...');
-  }
+  });
 
-  function geraPosicao(min, max) {
-    return (Math.random() * (max - min) + min) + "%";
-  }
+  correctlyButton.addEventListener("click", function () {
+    alert("Resposta correta! Vamo comer um empadão");
+    window.open('https://www.youtube.com/watch?v=izGwDsrQ1eQ','_blank');
+  });
+
 </script>
 
 </html>
