@@ -40,9 +40,8 @@
   }
 
   .buttons {
-    display: flex;
-    gap: 30px;
-    justify-content: center;
+    position: relative;
+    height: 80px;
   }
 
   button {
@@ -60,6 +59,7 @@
     background: #4CAF50;
     color: white;
     box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+    z-index: 1;
   }
 
   button:first-child:hover {
@@ -71,11 +71,8 @@
     background: #ff4444;
     color: white;
     box-shadow: 0 5px 15px rgba(255, 68, 68, 0.3);
-    transition: all 0.5s ease;
-  }
-
-  button:nth-child(2):hover {
-    transform: scale(0.95) rotate(5deg);
+    position: absolute;
+    z-index: 2;
   }
 
   .hearts {
@@ -111,7 +108,7 @@
     <div class="heart" style="left: 30%; top: 70%">❤️</div>
     <div class="heart" style="left: 80%; top: 40%">❤️</div>
   </div>
-  
+
   <div class="container">
     <h1>Bora Jogar? ❤️</h1>
     <div class='buttons'>
@@ -127,26 +124,30 @@
 
 <script>
   const moveButton = document.querySelector("button:nth-child(2)");
-  const container = document.querySelector('.container');
-  const radius = 80;
+  const yesButton = document.querySelector("button:first-child");
+  const radius = 100;
+
+  // Coloca o botão "Não" numa posição inicial
+  moveButton.style.left = "0px";
+  moveButton.style.top = "0px";
 
   document.addEventListener('mousemove', (e) => {
     const buttonRect = moveButton.getBoundingClientRect();
-    const buttonX = buttonRect.left + buttonRect.width/2;
-    const buttonY = buttonRect.top + buttonRect.height/2;
-    
+    const buttonX = buttonRect.left + buttonRect.width / 2;
+    const buttonY = buttonRect.top + buttonRect.height / 2;
+
     const distance = Math.hypot(e.clientX - buttonX, e.clientY - buttonY);
-    
-    if(distance < radius) {
-      const newX = Math.random() * (window.innerWidth - moveButton.offsetWidth - 40);
-      const newY = Math.random() * (window.innerHeight - moveButton.offsetHeight - 40);
-      
-      moveButton.style.transform = `translate(${newX}px, ${newY}px)`;
-      container.style.transform = `rotate(${(Math.random() - 0.5) * 3}deg)`;
+
+    if (distance < radius) {
+      const newX = Math.random() * (window.innerWidth - moveButton.offsetWidth);
+      const newY = Math.random() * (window.innerHeight - moveButton.offsetHeight);
+
+      moveButton.style.left = `${newX}px`;
+      moveButton.style.top = `${newY}px`;
     }
   });
 
-  document.querySelector("button:first-child").addEventListener("click", function() {
+  yesButton.addEventListener("click", function () {
     this.style.transform = 'scale(1.1)';
     setTimeout(() => {
       alert("🎉 AEEEE! Agora é pra sempre, hein? ❤️");
